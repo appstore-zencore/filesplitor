@@ -1,0 +1,21 @@
+language: python
+python:
+    - "2.7"
+    - "3.4"
+    - "3.5"
+    - "3.6"
+env:
+    - CODECOV_TOKEN="a1a9e95f-314d-4eaf-81aa-44940ed08749"
+install:
+    - pip install click
+    - pip install codecov
+script:
+    - pip install .
+    - which filesplitor
+    - filesplitor --help
+    - filesplitor split test.txt -s 2
+    - file test.txt.1
+    - file test.txt.2
+    - coverage run tests.py
+after_success:
+    - codecov
